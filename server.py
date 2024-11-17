@@ -3,11 +3,6 @@ from work_with_url import get_video_summarize, get_video_id_from_url
 app = Flask(__name__)
 
 
-
-
-
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -25,8 +20,6 @@ def summarize_video():
     video_text = get_video_summarize(youtube_id)
 
     return jsonify({"summary": video_text})
-
-
 
 
 if __name__ == '__main__':
