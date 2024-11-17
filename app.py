@@ -1,21 +1,19 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
-# Главная страница
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-# Страница для ввода ссылки
 @app.route('/summarize')
 def summarize():
     return render_template('ytpage.html')
 
 
-def any_commands(a):
+def any_commands_example(a):
     s = str(a)
     return f'''
         <!DOCTYPE html>
@@ -28,23 +26,23 @@ def any_commands(a):
 <body>
     <h1>В ссылке {len(s)} символов</h1>
 </body>
-</html>'''
+</html>
+'''
 
 
 
-# Обработка отправленных данных
 @app.route('/submit-link', methods=['POST'])
 def submit_link():
-    # Получение ссылки из формы
+
     youtube_link = request.form.get('youtube_link')
-    print("aboba")
     if youtube_link:
-        return any_commands(youtube_link)
+        print(f"ссылка получена: {youtube_link}")
+        return any_commands_example(youtube_link)
 
     else:
+        print(f"ссылка не получена")
         return "No link provided!", 400
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
